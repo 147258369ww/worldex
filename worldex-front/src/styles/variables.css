@@ -1,0 +1,15 @@
+:root {
+  --color-primary: #0a1628;
+  --color-primary-light: #1a2a4a;
+  --color-accent: #a68528;
+  --color-accent-hover: #bf9a30;
+  --color-text: #1e293b;
+  --color-text-light: #64748b;
+  --color-bg: #f8fafc;
+  --color-white: #ffffff;
+  --font-body: 'PingFang SC', 'Microsoft YaHei', 'Helvetica Neue', sans-serif;
+  --radius: 8px;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
+  --shadow-md: 0 4px 16px rgba(0,0,0,0.1);
+  --max-width: 1200px;
+}
