@@ -7,7 +7,7 @@
         <h2 class="section-title">{{ langStore.t('home.intro_title') }}</h2>
         <div class="intro-layout">
           <div class="intro-image">
-            <img :src="aboutImage" alt="About Us" />
+            <img :src="companyInfo.about_image || fallbackImage" alt="About Us" />
           </div>
           <div class="intro-text" v-html="langStore.currentLocale === 'zh' ? companyInfo.about_zh : companyInfo.about_en"></div>
         </div>
@@ -42,7 +42,7 @@ import { getNews } from '@/api/news'
 import NavBar from '@/components/NavBar.vue'
 import BannerSwiper from '@/components/BannerSwiper.vue'
 import Footer from '@/components/Footer.vue'
-import aboutImage from '@/assets/hero.png'
+import fallbackImage from '@/assets/hero.png'
 
 const langStore = useLangStore()
 const companyInfo = ref(null)

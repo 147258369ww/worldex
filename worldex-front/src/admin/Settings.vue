@@ -10,6 +10,10 @@
         <h3>{{ langStore.t('admin.settings.addressEn') }}</h3><input v-model="form.address_en" />
         <h3>{{ langStore.t('admin.settings.phone') }}</h3><input v-model="form.phone" />
         <h3>{{ langStore.t('admin.settings.email') }}</h3><input v-model="form.email" />
+        <h3>{{ langStore.t('admin.settings.aboutImage') }}</h3>
+        <input v-model="form.about_image" placeholder="输入图片URL或上传" />
+        <input type="file" @change="handleImageUpload" accept="image/*" style="margin-top:8px" />
+        <img v-if="form.about_image" :src="form.about_image" style="max-width:200px;display:block;margin-top:8px;border-radius:4px" />
         <h3>{{ langStore.t('admin.settings.partnersZh') }}</h3><textarea v-model="form.partners_zh" rows="3"></textarea>
         <h3>{{ langStore.t('admin.settings.partnersEn') }}</h3><textarea v-model="form.partners_en" rows="3"></textarea>
         <button type="submit" class="btn btn-primary">{{ langStore.t('admin.common.save') }}</button>
@@ -22,13 +26,20 @@
 import { ref, onMounted } from 'vue'
 import { useLangStore } from '@/stores/lang'
 import { getAdminCompanyInfo, updateCompanyInfo } from '@/api/company'
+import { uploadFile } from '@/api/upload'
 import AdminSidebar from '@/components/AdminSidebar.vue'
 
 const langStore = useLangStore()
 
-const form = ref({ about_zh:'', about_en:'', address_zh:'', address_en:'', phone:'', email:'', partners_zh:'', partners_en:'' })
+const form = ref({ about_zh:'', about_en:'', address_zh:'', address_en:'', phone:'', email:'', about_image:'', partners_zh:'', partners_en:'' })
 
 onMounted(async () => { try { const r = await getAdminCompanyInfo(); if (r.code === 0) Object.assign(form.value, r.data) } catch {} })
+
+async function handleImageUpload(e) {
+  const file = e.target.files[0]
+  if (!file) return
+  try { const r = await uploadFile(file); if (r.code === 0) form.value.about_image = r.data.url } catch {}
+}
 
 async function handleSave() { try { await updateCompanyInfo(form.value); alert(langStore.t('admin.settings.saved')) } catch {} }
 </script>

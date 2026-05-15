@@ -14,7 +14,7 @@ export default {
     news: { title: 'News', titleZh: 'Title (ZH)', titleEn: 'Title (EN)', summaryZh: 'Summary (ZH)', contentZh: 'Content (ZH)', published: 'Published' },
     contacts: { title: 'Messages', name: 'Name', company: 'Company', email: 'Email', phone: 'Phone', date: 'Date', read: 'Read', markRead: 'Mark Read', markUnread: 'Mark Unread', view: 'View', detail: 'Message Detail', position: 'Position', address: 'Address', message: 'Message' },
     users: { title: 'Users', username: 'Username', password: 'Password', role: 'Role', created: 'Created', admin: 'Admin', editor: 'Editor' },
-    settings: { title: 'Settings', aboutZh: 'About (ZH)', aboutEn: 'About (EN)', addressZh: 'Address (ZH)', addressEn: 'Address (EN)', phone: 'Phone', email: 'Email', partnersZh: 'Partners (ZH)', partnersEn: 'Partners (EN)', saved: 'Saved' },
+    settings: { title: 'Settings', aboutZh: 'About (ZH)', aboutEn: 'About (EN)', aboutImage: 'About Image', addressZh: 'Address (ZH)', addressEn: 'Address (EN)', phone: 'Phone', email: 'Email', partnersZh: 'Partners (ZH)', partnersEn: 'Partners (EN)', saved: 'Saved' },
     login: { title: 'Admin Login', username: 'Username', password: 'Password', submit: 'Login', failed: 'Login failed', networkError: 'Network error' }
   }
 }
