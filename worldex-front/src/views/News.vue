@@ -1,7 +1,17 @@
 <template>
   <div class="news-page">
     <NavBar />
-    <div class="page-banner"><h1>{{ langStore.t('news.title') }}</h1></div>
+    <div class="page-banner">
+      <div class="container">
+        <div class="breadcrumb">
+          <router-link to="/">{{ langStore.t('nav.breadcrumb_home') }}</router-link>
+          <span class="sep">&gt;</span>
+          <span>{{ langStore.t('news.title') }}</span>
+        </div>
+        <h1>{{ langStore.t('news.title') }}</h1>
+        <p class="hero-subtitle">{{ langStore.t('news.subtitle') }}</p>
+      </div>
+    </div>
     <section class="section">
       <div class="container">
         <div v-if="newsList.length === 0" class="no-data">{{ langStore.t('news.no_data') }}</div>
@@ -54,16 +64,90 @@ function formatDate(d) { return d ? new Date(d).toLocaleDateString(langStore.cur
 </script>
 
 <style scoped>
-.news-hlist { display: flex; flex-direction: column; border-top: 1px solid #e2e8f0; }
-.news-hitem { display: flex; align-items: center; gap: 20px; padding: 16px 0; border-bottom: 1px solid #e2e8f0; cursor: pointer; transition: background 0.2s; }
-.news-hitem:hover { background: rgba(201,168,76,0.05); }
-.news-hdate { min-width: 100px; font-size: 0.85rem; color: var(--color-text-light); }
-.news-htitle { flex: 1; font-weight: 600; color: var(--color-primary); }
-.news-hsummary { flex: 2; font-size: 0.9rem; color: var(--color-text-light); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.news-harrow { color: var(--color-accent); font-size: 1.2rem; }
-.pagination { display: flex; justify-content: center; align-items: center; gap: 16px; margin-top: 30px; }
-.pagination button { padding: 6px 16px; border: 1px solid #e2e8f0; background: var(--color-white); border-radius: var(--radius); cursor: pointer; }
-.pagination button:disabled { opacity: 0.5; cursor: not-allowed; }
-.no-data { text-align: center; color: var(--color-text-light); padding: 40px 0; }
-@media (max-width: 768px) { .news-hitem { flex-wrap: wrap; gap: 8px; } .news-hsummary { display: none; } }
+.news-hlist {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--color-border);
+}
+
+.news-hitem {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--color-border);
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.news-hitem:hover {
+  background: rgba(166, 133, 40, 0.04);
+}
+
+.news-hdate {
+  min-width: 100px;
+  font-size: 12px;
+  color: var(--color-text-muted);
+}
+
+.news-htitle {
+  flex: 1;
+  font-family: var(--font-heading);
+  font-size: 16px;
+  font-weight: normal;
+  color: var(--color-text);
+  transition: color 0.2s;
+}
+
+.news-hitem:hover .news-htitle {
+  color: var(--color-hover-blue);
+}
+
+.news-hsummary {
+  flex: 2;
+  font-family: var(--font-heading);
+  font-size: 14px;
+  color: var(--color-text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 22px;
+}
+
+.news-harrow {
+  color: var(--color-accent);
+  font-size: 1.2rem;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  margin-top: 30px;
+}
+
+.pagination button {
+  padding: 6px 16px;
+  border: 1px solid var(--color-border);
+  background: var(--color-white);
+  border-radius: var(--radius);
+  cursor: pointer;
+}
+
+.pagination button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.no-data {
+  text-align: center;
+  color: var(--color-text-muted);
+  padding: 40px 0;
+}
+
+@media (max-width: 768px) {
+  .news-hitem { flex-wrap: wrap; gap: 8px; }
+  .news-hsummary { display: none; }
+}
 </style>
