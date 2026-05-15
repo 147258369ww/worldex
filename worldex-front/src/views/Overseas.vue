@@ -24,7 +24,6 @@
             <div class="card-body">
               <h3 class="card-title">{{ langStore.currentLocale === 'zh' ? item.name_zh : item.name_en }}</h3>
               <p class="card-meta">{{ formatDateRange(item.date_from, item.date_to) }} | {{ langStore.currentLocale === 'zh' ? item.city_zh : item.city_en }}, {{ langStore.currentLocale === 'zh' ? item.country_zh : item.country_en }}</p>
-              <p class="card-pubdate">{{ formatPubDate(item.created_at) }}</p>
             </div>
           </router-link>
         </div>
@@ -62,12 +61,6 @@ const formatDateRange = (from, to) => {
     return `${f.getFullYear()}.${String(f.getMonth() + 1).padStart(2, '0')}.${String(f.getDate()).padStart(2, '0')}-${String(t.getDate()).padStart(2, '0')}`
   }
   return `${formatDate(from)}-${formatDate(to)}`
-}
-
-const formatPubDate = (d) => {
-  if (!d) return ''
-  const dt = new Date(d)
-  return `${dt.getFullYear()}-${String(dt.getMonth() + 1).padStart(2, '0')}-${String(dt.getDate()).padStart(2, '0')}`
 }
 
 onMounted(async () => {
@@ -151,30 +144,6 @@ onMounted(async () => {
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
-}
-
-.card-pubdate {
-  font-size: 12px;
-  color: var(--color-text-muted);
-  margin: 0;
-  margin-top: auto;
-  padding-top: 4px;
-  position: relative;
-}
-
-.card-pubdate::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 1px;
-  background: #f2f2f2;
-  transition: background 0.3s;
-}
-
-.exhibition-card:hover .card-pubdate::before {
-  background: var(--color-accent-content);
 }
 
 @keyframes fadeSlideIn {
