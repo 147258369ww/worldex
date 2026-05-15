@@ -45,12 +45,18 @@ async function getAll(req, res) {
 }
 
 async function create(req, res) {
-  const [id] = await db('exhibitions').insert(req.body);
+  const data = { ...req.body };
+  delete data.created_at;
+  delete data.updated_at;
+  const [id] = await db('exhibitions').insert(data);
   return success(res, { id });
 }
 
 async function update(req, res) {
-  await db('exhibitions').where({ id: req.params.id }).update(req.body);
+  const data = { ...req.body };
+  delete data.created_at;
+  delete data.updated_at;
+  await db('exhibitions').where({ id: req.params.id }).update(data);
   return success(res);
 }
 

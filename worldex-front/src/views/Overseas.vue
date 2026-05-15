@@ -3,7 +3,8 @@
     <NavBar />
     <div class="page-banner">
       <div class="container">
-        <h1>{{ langStore.t('exhibition.title_overseas') }}</h1>
+        <h1 v-if="langStore.currentLocale === 'zh'">海外<span class="highlight">展览</span></h1>
+        <h1 v-else>Overseas<span class="highlight"> Exhibitions</span></h1>
         <p class="hero-subtitle">{{ langStore.t('exhibition.subtitle_overseas') }}</p>
       </div>
     </div>
@@ -157,5 +158,9 @@ onMounted(async () => {
 
 @media (max-width: 640px) {
   .exhibition-grid { grid-template-columns: 1fr; }
+}
+
+.page-banner .highlight {
+  color: var(--color-accent-content);
 }
 </style>

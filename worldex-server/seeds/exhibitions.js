@@ -17,7 +17,8 @@ async function seed() {
       image: 'https://picsum.photos/seed/brazil2026/800/500',
       intro_zh: '南美洲最大的食品和商超行业展览会之一，汇聚全球优质供应商和采购商。',
       intro_en: 'One of the largest food and supermarket trade fairs in South America.',
-      sort_order: 1, is_active: 1
+      sort_order: 1, is_active: 1,
+      created_at: '2026-01-05 10:00:00'
     },
     {
       type: 'overseas',
@@ -30,7 +31,8 @@ async function seed() {
       image: 'https://picsum.photos/seed/malaysia2026/800/500',
       intro_zh: '东盟地区最具影响力的食品饮料行业专业展会。',
       intro_en: 'The most influential food and beverage trade show in the ASEAN region.',
-      sort_order: 2, is_active: 1
+      sort_order: 2, is_active: 1,
+      created_at: '2025-12-23 10:00:00'
     },
     {
       type: 'overseas',
@@ -43,7 +45,8 @@ async function seed() {
       image: 'https://picsum.photos/seed/indonesia2026/800/500',
       intro_zh: '印尼及东南亚地区食品加工与包装领域的旗舰展会。',
       intro_en: 'Flagship exhibition for food processing and packaging in Indonesia and SE Asia.',
-      sort_order: 3, is_active: 1
+      sort_order: 3, is_active: 1,
+      created_at: '2025-12-23 10:00:00'
     },
     {
       type: 'overseas',
@@ -56,7 +59,8 @@ async function seed() {
       image: 'https://picsum.photos/seed/russia2026/800/500',
       intro_zh: '俄罗斯及独联体国家规模最大的综合性食品展览会。',
       intro_en: 'The largest comprehensive food exhibition in Russia and the CIS countries.',
-      sort_order: 4, is_active: 1
+      sort_order: 4, is_active: 1,
+      created_at: '2026-01-05 10:00:00'
     },
     {
       type: 'overseas',
@@ -69,7 +73,8 @@ async function seed() {
       image: 'https://picsum.photos/seed/thailand2026/800/500',
       intro_zh: '亚太地区规模最大、最具影响力的食品饮料行业盛会。',
       intro_en: 'The largest and most influential F&B trade event in the Asia-Pacific region.',
-      sort_order: 5, is_active: 1
+      sort_order: 5, is_active: 1,
+      created_at: '2025-12-23 10:00:00'
     },
     {
       type: 'overseas',
@@ -82,7 +87,8 @@ async function seed() {
       image: 'https://picsum.photos/seed/dubai2026/800/500',
       intro_zh: '全球最大的年度食品和饮料贸易展览会之一。',
       intro_en: 'One of the world\'s largest annual food and beverage trade exhibitions.',
-      sort_order: 6, is_active: 1
+      sort_order: 6, is_active: 1,
+      created_at: '2026-01-04 10:00:00'
     },
 
     // ── 国内展览 ──
@@ -97,7 +103,8 @@ async function seed() {
       image: 'https://picsum.photos/seed/canton2026/800/500',
       intro_zh: '中国规模最大、历史最悠久的综合性国际贸易盛会。',
       intro_en: 'China\'s largest and oldest comprehensive international trade fair.',
-      sort_order: 1, is_active: 1
+      sort_order: 1, is_active: 1,
+      created_at: '2025-12-23 10:00:00'
     },
     {
       type: 'domestic',
@@ -110,7 +117,8 @@ async function seed() {
       image: 'https://picsum.photos/seed/sial2026/800/500',
       intro_zh: '亚洲最大的食品饮料展览会，汇聚全球优质食品品牌。',
       intro_en: 'Asia\'s largest food and beverage exhibition, gathering global food brands.',
-      sort_order: 2, is_active: 1
+      sort_order: 2, is_active: 1,
+      created_at: '2026-01-05 10:00:00'
     },
     {
       type: 'domestic',
@@ -123,7 +131,8 @@ async function seed() {
       image: 'https://picsum.photos/seed/fisheries2026/800/500',
       intro_zh: '全球最大的水产贸易展会之一，汇聚全球渔业企业。',
       intro_en: 'One of the world\'s largest seafood trade shows.',
-      sort_order: 3, is_active: 1
+      sort_order: 3, is_active: 1,
+      created_at: '2026-02-12 10:00:00'
     },
     {
       type: 'domestic',
@@ -136,7 +145,8 @@ async function seed() {
       image: 'https://picsum.photos/seed/ciie2026/800/500',
       intro_zh: '全球首个以进口为主题的国家级博览会。',
       intro_en: 'The world\'s first national-level expo themed on import.',
-      sort_order: 4, is_active: 1
+      sort_order: 4, is_active: 1,
+      created_at: '2025-12-23 10:00:00'
     },
     {
       type: 'domestic',
@@ -149,7 +159,8 @@ async function seed() {
       image: 'https://picsum.photos/seed/fruit2026/800/500',
       intro_zh: '亚洲领先的新鲜果蔬行业国际贸易展览会。',
       intro_en: 'Asia\'s leading international trade fair for the fresh fruit and vegetable industry.',
-      sort_order: 5, is_active: 1
+      sort_order: 5, is_active: 1,
+      created_at: '2026-03-20 10:00:00'
     },
     {
       type: 'domestic',
@@ -162,7 +173,8 @@ async function seed() {
       image: 'https://picsum.photos/seed/sinopack2026/800/500',
       intro_zh: '华南地区最具规模的包装行业专业展会。',
       intro_en: 'The largest packaging industry exhibition in South China.',
-      sort_order: 6, is_active: 1
+      sort_order: 6, is_active: 1,
+      created_at: '2026-01-05 10:00:00'
     },
     {
       type: 'domestic',
@@ -175,7 +187,8 @@ async function seed() {
       image: 'https://picsum.photos/seed/ccbec2026/800/500',
       intro_zh: '国内最具影响力的跨境电商行业展会之一。',
       intro_en: 'One of China\'s most influential cross-border e-commerce trade fairs.',
-      sort_order: 7, is_active: 1
+      sort_order: 7, is_active: 1,
+      created_at: '2026-01-12 10:00:00'
     }
   ];
 
