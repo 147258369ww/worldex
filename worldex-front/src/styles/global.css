@@ -18,21 +18,52 @@ img { max-width: 100%; display: block; }
 
 .page-banner {
   background: linear-gradient(180deg,
-    var(--color-bg) 0%,
-    rgba(166, 133, 40, 0.08) 50%,
-    var(--color-bg) 100%);
-  color: var(--color-text);
-  padding: 60px 0 40px;
+    rgba(10, 22, 40, 0.03) 0%,
+    rgba(166, 133, 40, 0.06) 50%,
+    rgba(10, 22, 40, 0.02) 100%);
+  padding: 80px 0 50px;
   text-align: left;
   margin-top: 70px;
 }
-.page-banner h1 {
-  font-size: 2rem;
-  font-weight: 700;
-  color: var(--color-primary);
+.page-banner .container {
   max-width: var(--max-width);
   margin: 0 auto;
   padding: 0 20px;
+}
+.page-banner h1 {
+  font-family: var(--font-heading);
+  font-size: 40px;
+  font-weight: 700;
+  color: var(--color-text);
+  line-height: 1.5;
+}
+.page-banner .container h1 {
+  margin: 0 0 4px;
+}
+/* Fallback for detail pages that don't use .container wrapper */
+.page-banner > h1 {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 20px;
+}
+.page-banner .hero-subtitle {
+  font-family: var(--font-en);
+  font-size: 16px;
+  color: var(--color-text-light);
+}
+.page-banner .breadcrumb {
+  font-size: 14px;
+  color: var(--color-text-muted);
+  margin-bottom: 16px;
+}
+.page-banner .breadcrumb a {
+  color: var(--color-text-muted);
+}
+.page-banner .breadcrumb a:hover {
+  color: var(--color-accent);
+}
+.page-banner .breadcrumb .sep {
+  margin: 0 8px;
 }
 
 .section { padding: 60px 0; }
