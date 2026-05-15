@@ -79,12 +79,12 @@ onMounted(async () => {
 </script>
 
 <style scoped>
-.no-data { text-align: center; color: var(--color-text-light); padding: 40px 0; }
+.no-data { text-align: center; color: var(--color-text-muted); padding: 40px 0; }
 
 .exhibition-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
+  gap: 2%;
 }
 
 .exhibition-card {
@@ -96,6 +96,7 @@ onMounted(async () => {
   animation: fadeSlideIn 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
   display: flex;
   flex-direction: column;
+  cursor: pointer;
 }
 
 .exhibition-card:hover {
@@ -128,8 +129,9 @@ onMounted(async () => {
 }
 
 .card-title {
-  font-size: 0.95rem;
-  font-weight: 700;
+  font-family: var(--font-heading);
+  font-size: 16px;
+  font-weight: normal;
   line-height: 1.4;
   color: var(--color-text);
   margin: 0;
@@ -140,8 +142,9 @@ onMounted(async () => {
 }
 
 .card-meta {
-  font-size: 0.8rem;
-  color: var(--color-text-light);
+  font-family: var(--font-heading);
+  font-size: 14px;
+  color: var(--color-text-muted);
   margin: 0;
   line-height: 1.5;
   display: -webkit-box;
@@ -151,11 +154,27 @@ onMounted(async () => {
 }
 
 .card-pubdate {
-  font-size: 0.75rem;
-  color: #94a3b8;
+  font-size: 12px;
+  color: var(--color-text-muted);
   margin: 0;
   margin-top: auto;
   padding-top: 4px;
+  position: relative;
+}
+
+.card-pubdate::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: #f2f2f2;
+  transition: background 0.3s;
+}
+
+.exhibition-card:hover .card-pubdate::before {
+  background: var(--color-hover-orange);
 }
 
 @keyframes fadeSlideIn {
