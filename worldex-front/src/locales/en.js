@@ -1,8 +1,8 @@
 export default {
-  nav: { home: 'Home', overseas: 'Overseas Exhibitions', domestic: 'Domestic Exhibitions', news: 'News', contact: 'Contact' },
+  nav: { home: 'Home', overseas: 'Overseas Exhibitions', domestic: 'Domestic Exhibitions', news: 'News', contact: 'Contact', breadcrumb_home: 'Home' },
   home: { banner_cta: 'Learn More', intro_title: 'About Us', overseas_btn: 'Overseas Exhibitions', domestic_btn: 'Domestic Exhibitions', news_title: 'Latest News', contact_title: 'Contact Us' },
-  exhibition: { title_overseas: 'Overseas Exhibitions', title_domestic: 'Domestic Exhibitions', filter_country: 'Country', filter_city: 'City', filter_date: 'Date', no_data: 'No exhibitions', back: 'Back to exhibitions' },
-  news: { title: 'News Center', read_more: 'Read More', back: 'Back to List', no_data: 'No news' },
+  exhibition: { title_overseas: 'Overseas Exhibitions', title_domestic: 'Domestic Exhibitions', subtitle_overseas: '海外展览', subtitle_domestic: '国内展览', filter_country: 'Country', filter_city: 'City', filter_date: 'Date', no_data: 'No exhibitions', back: 'Back to exhibitions' },
+  news: { title: 'News Center', subtitle: '新闻中心', read_more: 'Read More', back: 'Back to List', no_data: 'No news' },
   contact: { title: 'Contact Us', name: 'Contact Person', company: 'Company', position: 'Position', phone: 'Phone', email: 'Email', address: 'Address', message: 'Message', submit: 'Submit', success: 'Submitted successfully' },
   footer: { copyright: '© 2024 Guangzhou SenHao Exhibition Co., Ltd. All Rights Reserved.' },
   admin: {

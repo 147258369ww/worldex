@@ -1,8 +1,8 @@
 export default {
-  nav: { home: '首页', overseas: '海外展览', domestic: '国内展览', news: '新闻中心', contact: '联系我们' },
+  nav: { home: '首页', overseas: '海外展览', domestic: '国内展览', news: '新闻中心', contact: '联系我们', breadcrumb_home: '首页' },
   home: { banner_cta: '了解更多', intro_title: '关于我们', overseas_btn: '海外展览', domestic_btn: '国内展览', news_title: '新闻动态', contact_title: '联系我们' },
-  exhibition: { title_overseas: '海外展览', title_domestic: '国内展览', filter_country: '国家', filter_city: '城市', filter_date: '日期', no_data: '暂无展会', back: '返回展览列表' },
-  news: { title: '新闻中心', read_more: '查看详情', back: '返回列表', no_data: '暂无新闻' },
+  exhibition: { title_overseas: '海外展览', title_domestic: '国内展览', subtitle_overseas: 'Overseas Exhibitions', subtitle_domestic: 'Domestic Exhibitions', filter_country: '国家', filter_city: '城市', filter_date: '日期', no_data: '暂无展会', back: '返回展览列表' },
+  news: { title: '新闻中心', subtitle: 'News Center', read_more: '查看详情', back: '返回列表', no_data: '暂无新闻' },
   contact: { title: '联系我们', name: '联系人', company: '公司', position: '职位', phone: '电话', email: '邮箱', address: '地址', message: '留言', submit: '提交', success: '提交成功' },
   footer: { copyright: '© 2024 广州森昊展览有限公司 All Rights Reserved.' },
   admin: {
