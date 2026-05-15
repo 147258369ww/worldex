@@ -1,7 +1,12 @@
 <template>
   <div class="exhibition-page">
     <NavBar />
-    <div class="page-banner"><h1>{{ langStore.t('exhibition.title_domestic') }}</h1></div>
+    <div class="page-banner">
+      <div class="container">
+        <h1>{{ langStore.t('exhibition.title_domestic') }}</h1>
+        <p class="hero-subtitle">{{ langStore.t('exhibition.subtitle_domestic') }}</p>
+      </div>
+    </div>
     <section class="section">
       <div class="container">
         <div v-if="list.length === 0" class="no-data">{{ langStore.t('exhibition.no_data') }}</div>
