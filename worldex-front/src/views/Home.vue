@@ -2,7 +2,7 @@
   <div class="home">
     <NavBar />
     <BannerSwiper />
-    <section class="section intro-section" v-if="companyInfo">
+    <section class="section intro-section" v-if="companyInfo && (langStore.currentLocale === 'zh' ? companyInfo.about_zh : companyInfo.about_en)">
       <div class="container">
         <h2 class="section-title">{{ langStore.t('home.intro_title') }}</h2>
         <div class="intro-layout">
