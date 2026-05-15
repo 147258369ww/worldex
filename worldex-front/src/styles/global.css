@@ -5,9 +5,6 @@ body {
   font-family: var(--font-body);
   color: var(--color-text);
   background-color: var(--color-bg);
-  background-image:
-    radial-gradient(rgba(10, 22, 40, 0.12) 1px, transparent 0);
-  background-size: 24px 24px;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
 }
@@ -18,9 +15,9 @@ img { max-width: 100%; display: block; }
 
 .page-banner {
   background: linear-gradient(180deg,
-    rgba(10, 22, 40, 0.03) 0%,
-    rgba(166, 133, 40, 0.06) 50%,
-    rgba(10, 22, 40, 0.02) 100%);
+    rgba(10, 22, 40, 0.02) 0%,
+    rgba(10, 22, 40, 0.04) 50%,
+    rgba(10, 22, 40, 0.01) 100%);
   padding: 80px 0 50px;
   text-align: left;
   margin-top: 70px;

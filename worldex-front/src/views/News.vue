@@ -115,7 +115,7 @@ function formatDate(d) { return d ? new Date(d).toLocaleDateString(langStore.cur
 }
 
 .news-harrow {
-  color: var(--color-accent);
+  color: var(--color-accent-content);
   font-size: 1.2rem;
 }
 

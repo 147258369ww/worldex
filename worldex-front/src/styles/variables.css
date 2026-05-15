@@ -3,14 +3,16 @@
   --color-primary-light: #1a2a4a;
   --color-accent: #a68528;
   --color-accent-hover: #bf9a30;
+  --color-accent-content: #ff8005;
+  --color-accent-content-hover: #e36c09;
   --color-text: #333;
   --color-text-light: #666;
   --color-text-muted: #999;
   --color-text-faint: #94a3b8;
-  --color-bg: #f8fafc;
+  --color-bg: #f7f7f7;
   --color-white: #ffffff;
   --color-border: #eee;
-  --color-hover-blue: #2196f3;
+  --color-hover-blue: #1e88e5;
   --color-hover-orange: #ff8005;
   --font-heading: 'Microsoft YaHei', '微软雅黑', sans-serif;
   --font-body: 'Helvetica Neue', Helvetica, Arial, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;

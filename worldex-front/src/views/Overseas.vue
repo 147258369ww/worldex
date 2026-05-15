@@ -174,7 +174,7 @@ onMounted(async () => {
 }
 
 .exhibition-card:hover .card-pubdate::before {
-  background: var(--color-hover-orange);
+  background: var(--color-accent-content);
 }
 
 @keyframes fadeSlideIn {
