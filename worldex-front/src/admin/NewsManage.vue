@@ -37,8 +37,30 @@ import { ref, reactive, onMounted } from 'vue'
 import { useLangStore } from '@/stores/lang'
 import { getAdminNews, createNews, updateNews, deleteNews } from '@/api/news'
 import { uploadFile } from '@/api/upload'
-import Editor from '@tinymce/tinymce-vue'
 import AdminSidebar from '@/components/AdminSidebar.vue'
+
+import 'tinymce/tinymce'
+import 'tinymce/models/dom/model'
+import 'tinymce/themes/silver'
+import 'tinymce/icons/default'
+import 'tinymce/plugins/advlist'
+import 'tinymce/plugins/autolink'
+import 'tinymce/plugins/lists'
+import 'tinymce/plugins/link'
+import 'tinymce/plugins/image'
+import 'tinymce/plugins/charmap'
+import 'tinymce/plugins/preview'
+import 'tinymce/plugins/anchor'
+import 'tinymce/plugins/searchreplace'
+import 'tinymce/plugins/visualblocks'
+import 'tinymce/plugins/code'
+import 'tinymce/plugins/fullscreen'
+import 'tinymce/plugins/insertdatetime'
+import 'tinymce/plugins/media'
+import 'tinymce/plugins/table'
+import 'tinymce/plugins/help'
+import 'tinymce/plugins/wordcount'
+import Editor from '@tinymce/tinymce-vue'
 
 const langStore = useLangStore()
 
@@ -47,8 +69,7 @@ const form = reactive({ title_zh: '', title_en: '', summary_zh: '', summary_en: 
 
 const editorConfig = {
   height: 500,
-  language: 'zh_CN',
-  language_url: 'https://cdn.tiny.cloud/1/no-api-key/tinymce/8/i18n/zh_CN.js',
+  license_key: 'gpl',
   skin_url: '/tinymce/skins/ui/oxide',
   content_css: '/tinymce/skins/content/default/content.css',
   plugins: 'advlist autolink lists link image charmap preview anchor searchreplace visualblocks code fullscreen insertdatetime media table help wordcount',
@@ -63,8 +84,6 @@ const editorConfig = {
       throw new Error(e.message || 'Upload failed')
     }
   },
-  branding: false,
-  promotion: false,
   menubar: false,
   block_formats: '正文=p; 标题1=h2; 标题2=h3; 标题3=h4',
 }
