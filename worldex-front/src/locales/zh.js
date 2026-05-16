@@ -11,7 +11,7 @@ export default {
     dashboard: { title: '控制台', exhibitions: '展览', news: '新闻', messages: '留言', banners: '横幅' },
     banners: { title: '横幅管理', image: '图片', titleZh: '标题（中文）', titleEn: '标题（英文）', link: '链接', sortOrder: '排序' },
     exhibitions: { title: '展览管理', nameZh: '名称（中文）', nameEn: '名称（英文）', type: '类型', city: '城市', date: '日期', overseas: '海外', domestic: '国内', cityZh: '城市（中文）', countryZh: '国家（中文）', venueZh: '场馆（中文）', introZh: '简介（中文）' },
-    news: { title: '新闻管理', titleZh: '标题（中文）', titleEn: '标题（英文）', summaryZh: '摘要（中文）', contentZh: '内容（中文）', published: '发布时间' },
+    news: { title: '新闻管理', titleZh: '标题（中文）', titleEn: '标题（英文）', summaryZh: '摘要（中文）', summaryEn: '摘要（英文）', contentZh: '内容（中文）', contentEn: '内容（英文）', published: '发布时间' },
     contacts: { title: '留言管理', name: '姓名', company: '公司', email: '邮箱', phone: '电话', date: '日期', read: '已读', markRead: '标记已读', markUnread: '标记未读', view: '查看', detail: '留言详情', position: '职位', address: '地址', message: '留言内容' },
     users: { title: '用户管理', username: '用户名', password: '密码', role: '角色', created: '创建时间', admin: '管理员', editor: '编辑员' },
     settings: { title: '系统设置', aboutZh: '关于我们（中文）', aboutEn: '关于我们（英文）', aboutImage: '关于我们图片', addressZh: '地址（中文）', addressEn: '地址（英文）', phone: '电话', email: '邮箱', partnersZh: '合作伙伴（中文）', partnersEn: '合作伙伴（英文）', saved: '已保存' },

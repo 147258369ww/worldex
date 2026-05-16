@@ -11,7 +11,7 @@ export default {
     dashboard: { title: 'Dashboard', exhibitions: 'Exhibitions', news: 'News', messages: 'Messages', banners: 'Banners' },
     banners: { title: 'Banners', image: 'Image', titleZh: 'Title (ZH)', titleEn: 'Title (EN)', link: 'Link', sortOrder: 'Sort Order' },
     exhibitions: { title: 'Exhibitions', nameZh: 'Name (ZH)', nameEn: 'Name (EN)', type: 'Type', city: 'City', date: 'Date', overseas: 'Overseas', domestic: 'Domestic', cityZh: 'City (ZH)', countryZh: 'Country (ZH)', venueZh: 'Venue (ZH)', introZh: 'Intro (ZH)' },
-    news: { title: 'News', titleZh: 'Title (ZH)', titleEn: 'Title (EN)', summaryZh: 'Summary (ZH)', contentZh: 'Content (ZH)', published: 'Published' },
+    news: { title: 'News', titleZh: 'Title (ZH)', titleEn: 'Title (EN)', summaryZh: 'Summary (ZH)', summaryEn: 'Summary (EN)', contentZh: 'Content (ZH)', contentEn: 'Content (EN)', published: 'Published' },
     contacts: { title: 'Messages', name: 'Name', company: 'Company', email: 'Email', phone: 'Phone', date: 'Date', read: 'Read', markRead: 'Mark Read', markUnread: 'Mark Unread', view: 'View', detail: 'Message Detail', position: 'Position', address: 'Address', message: 'Message' },
     users: { title: 'Users', username: 'Username', password: 'Password', role: 'Role', created: 'Created', admin: 'Admin', editor: 'Editor' },
     settings: { title: 'Settings', aboutZh: 'About (ZH)', aboutEn: 'About (EN)', aboutImage: 'About Image', addressZh: 'Address (ZH)', addressEn: 'Address (EN)', phone: 'Phone', email: 'Email', partnersZh: 'Partners (ZH)', partnersEn: 'Partners (EN)', saved: 'Saved' },
