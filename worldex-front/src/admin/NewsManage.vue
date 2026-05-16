@@ -17,7 +17,11 @@
           <h3>{{ editing?.id ? langStore.t('admin.common.edit') : langStore.t('admin.common.create') }} {{ langStore.t('admin.news.title') }}</h3>
           <input v-model="form.title_zh" :placeholder="langStore.t('admin.news.titleZh')" /><input v-model="form.title_en" :placeholder="langStore.t('admin.news.titleEn')" />
           <input v-model="form.summary_zh" :placeholder="langStore.t('admin.news.summaryZh')" />
-          <textarea v-model="form.content_zh" :placeholder="langStore.t('admin.news.contentZh')" rows="5"></textarea>
+          <input v-model="form.summary_en" :placeholder="langStore.t('admin.news.summaryEn')" />
+          <label class="field-label">{{ langStore.t('admin.news.contentZh') }}</label>
+          <Editor v-model="form.content_zh" :init="editorConfig" />
+          <label class="field-label" style="margin-top:12px">{{ langStore.t('admin.news.contentEn') }}</label>
+          <Editor v-model="form.content_en" :init="editorConfig" />
           <input v-model="form.published_at" type="date" />
           <label style="display:flex;align-items:center;gap:8px;margin-bottom:12px"><input type="checkbox" v-model="form.is_active" /> {{ langStore.t('admin.common.active') }}</label>
           <input type="file" @change="handleUpload" />
@@ -33,12 +37,33 @@ import { ref, reactive, onMounted } from 'vue'
 import { useLangStore } from '@/stores/lang'
 import { getAdminNews, createNews, updateNews, deleteNews } from '@/api/news'
 import { uploadFile } from '@/api/upload'
+import Editor from '@tinymce/tinymce-vue'
 import AdminSidebar from '@/components/AdminSidebar.vue'
 
 const langStore = useLangStore()
 
 const list = ref([]); const showForm = ref(false); const editing = ref(null)
 const form = reactive({ title_zh: '', title_en: '', summary_zh: '', summary_en: '', content_zh: '', content_en: '', published_at: '', is_active: true, cover_image: '' })
+
+const editorConfig = {
+  height: 500,
+  language: 'zh_CN',
+  language_url: 'https://cdn.tiny.cloud/1/no-api-key/tinymce/8/i18n/zh_CN.js',
+  skin_url: '/tinymce/skins/ui/oxide',
+  content_css: '/tinymce/skins/content/default/content.css',
+  plugins: 'advlist autolink lists link image charmap preview anchor searchreplace visualblocks code fullscreen insertdatetime media table help wordcount',
+  toolbar: 'undo redo | blocks | bold italic underline strikethrough | forecolor backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image table | code fullscreen | help',
+  images_upload_handler: async (blobInfo, progress) => {
+    const file = new File([blobInfo.blob()], blobInfo.filename(), { type: blobInfo.blob().type })
+    const res = await uploadFile(file)
+    if (res.code === 0) return res.data.url
+    throw new Error('Upload failed')
+  },
+  branding: false,
+  promotion: false,
+  menubar: false,
+  block_formats: '正文=p; 标题1=h2; 标题2=h3; 标题3=h4',
+}
 
 async function fetch() { try { const r = await getAdminNews({ limit: 100 }); if (r.code === 0) list.value = r.data.list } catch {} }
 onMounted(fetch)
@@ -57,7 +82,8 @@ async function handleDelete(id) { if (!confirm(langStore.t('admin.common.deleteC
 .btn-sm { padding: 4px 12px; border: 1px solid #e2e8f0; border-radius: 4px; cursor: pointer; margin-right: 4px; background: var(--color-white); }
 .btn-danger { color: #ef4444; border-color: #ef4444; }
 .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; z-index: 2000; }
-.modal { background: var(--color-white); padding: 30px; border-radius: var(--radius); width: 90%; max-width: 500px; max-height: 80vh; overflow-y: auto; }
+.modal { background: var(--color-white); padding: 30px; border-radius: var(--radius); width: 90%; max-width: 900px; max-height: 80vh; overflow-y: auto; }
 .modal input, .modal textarea { width: 100%; padding: 10px; margin-bottom: 12px; border: 1px solid #e2e8f0; border-radius: var(--radius); font-family: var(--font-body); }
 .modal-actions { display: flex; gap: 12px; margin-top: 16px; }
+.field-label { display: block; font-size: 0.9rem; font-weight: 500; margin-bottom: 6px; color: var(--color-text); }
 </style>
