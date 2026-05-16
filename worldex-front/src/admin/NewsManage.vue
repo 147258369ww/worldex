@@ -69,13 +69,16 @@ const editorConfig = {
         input.onchange = async () => {
           const file = input.files[0]
           if (!file) return
+          editor.setProgressState(true)
           try {
             const res = await uploadFile(file)
             if (res.code === 0) {
-              editor.insertContent(`<img src="${res.data.url}" alt="" style="max-width:100%; height:auto;" />`)
+              editor.insertContent(`<img src="${res.data.url}" alt="" style="max-width:100%;" />`)
+              editor.fire('change')
               editor.fire('input')
             }
           } catch { /* upload failed, ignore */ }
+          editor.setProgressState(false)
         }
         input.click()
       }
