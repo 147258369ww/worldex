@@ -36,6 +36,7 @@
 import { ref, reactive, onMounted } from 'vue'
 import { useLangStore } from '@/stores/lang'
 import { getAdminNews, createNews, updateNews, deleteNews } from '@/api/news'
+import { uploadFile } from '@/api/upload'
 import AdminSidebar from '@/components/AdminSidebar.vue'
 
 import 'tinymce/tinymce'
