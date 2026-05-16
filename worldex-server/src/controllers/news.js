@@ -59,8 +59,15 @@ async function update(req, res) {
   if (data.images && typeof data.images === 'string') {
     data.images = JSON.stringify(JSON.parse(data.images));
   }
-  await db('news').where({ id: req.params.id }).update(data);
-  return success(res);
+  try {
+    await db('news').where({ id: req.params.id }).update(data);
+    return success(res);
+  } catch (e) {
+    if (e.code === 'ER_TRUNCATED_WRONG_VALUE') {
+      return fail(res, '日期时间格式错误，请检查发布日期字段');
+    }
+    return fail(res, e.message);
+  }
 }
 
 async function remove(req, res) {

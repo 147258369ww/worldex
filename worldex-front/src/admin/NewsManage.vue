@@ -24,7 +24,7 @@
           <Editor v-model="form.content_en" :init="editorConfig" license-key="gpl" />
           <input v-model="form.published_at" type="date" />
           <label style="display:flex;align-items:center;gap:8px;margin-bottom:12px"><input type="checkbox" v-model="form.is_active" /> {{ langStore.t('admin.common.active') }}</label>
-          <input type="file" @change="handleUpload" />
+          <div v-if="saveError" class="save-error">{{ saveError }}</div>
           <div class="modal-actions"><button @click="handleSave" class="btn btn-primary">{{ langStore.t('admin.common.save') }}</button><button @click="showForm = false" class="btn">{{ langStore.t('admin.common.cancel') }}</button></div>
         </div>
       </div>
@@ -36,7 +36,6 @@
 import { ref, reactive, onMounted } from 'vue'
 import { useLangStore } from '@/stores/lang'
 import { getAdminNews, createNews, updateNews, deleteNews } from '@/api/news'
-import { uploadFile } from '@/api/upload'
 import AdminSidebar from '@/components/AdminSidebar.vue'
 
 import 'tinymce/tinymce'
@@ -49,7 +48,7 @@ import Editor from '@tinymce/tinymce-vue'
 
 const langStore = useLangStore()
 
-const list = ref([]); const showForm = ref(false); const editing = ref(null)
+const list = ref([]); const showForm = ref(false); const editing = ref(null); const saveError = ref('')
 const form = reactive({ title_zh: '', title_en: '', summary_zh: '', summary_en: '', content_zh: '', content_en: '', published_at: '', is_active: true, cover_image: '' })
 
 const editorConfig = {
@@ -89,9 +88,8 @@ const editorConfig = {
 
 async function fetch() { try { const r = await getAdminNews({ limit: 100 }); if (r.code === 0) list.value = r.data.list } catch {} }
 onMounted(fetch)
-function openForm(item) { editing.value = item || null; if (item) Object.assign(form, item); else Object.assign(form, { title_zh: '', title_en: '', summary_zh: '', summary_en: '', content_zh: '', content_en: '', published_at: '', is_active: true, cover_image: '' }); showForm.value = true }
-async function handleUpload(e) { const f = e.target.files[0]; if (!f) return; try { const r = await uploadFile(f); if (r.code === 0) form.cover_image = r.data.url } catch {} }
-async function handleSave() { try { if (editing.value?.id) await updateNews(editing.value.id, { ...form }); else await createNews({ ...form }); showForm.value = false; fetch() } catch {} }
+function openForm(item) { editing.value = item || null; if (item) { const copy = { ...item }; if (copy.published_at) copy.published_at = copy.published_at.split('T')[0]; Object.assign(form, copy); } else Object.assign(form, { title_zh: '', title_en: '', summary_zh: '', summary_en: '', content_zh: '', content_en: '', published_at: '', is_active: true, cover_image: '' }); showForm.value = true }
+async function handleSave() { saveError.value = ''; const payload = { ...form }; if (payload.published_at) { const d = new Date(payload.published_at); payload.published_at = d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0'); } try { if (editing.value?.id) await updateNews(editing.value.id, payload); else await createNews(payload); showForm.value = false; fetch() } catch (e) { saveError.value = e?.response?.data?.message || e.message || '保存失败' } }
 async function handleDelete(id) { if (!confirm(langStore.t('admin.common.deleteConfirm'))) return; try { await deleteNews(id); fetch() } catch {} }
 </script>
 
@@ -107,5 +105,6 @@ async function handleDelete(id) { if (!confirm(langStore.t('admin.common.deleteC
 .modal { background: var(--color-white); padding: 30px; border-radius: var(--radius); width: 90%; max-width: 900px; max-height: 80vh; overflow-y: auto; }
 .modal input, .modal textarea { width: 100%; padding: 10px; margin-bottom: 12px; border: 1px solid #e2e8f0; border-radius: var(--radius); font-family: var(--font-body); }
 .modal-actions { display: flex; gap: 12px; margin-top: 16px; }
+.save-error { color: #ef4444; background: #fef2f2; border: 1px solid #fecaca; padding: 10px 14px; border-radius: 6px; margin-bottom: 12px; font-size: 0.9rem; }
 .field-label { display: block; font-size: 0.9rem; font-weight: 500; margin-bottom: 6px; color: var(--color-text); }
 </style>
