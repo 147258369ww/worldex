@@ -95,3 +95,8 @@ async function handleDelete(id) { if (!confirm(langStore.t('admin.common.deleteC
 .modal-actions { display: flex; gap: 12px; margin-top: 16px; }
 .field-label { display: block; font-size: 0.9rem; font-weight: 500; margin-bottom: 6px; color: var(--color-text); }
 </style>
+
+<style>
+.tox-dialog__backdrop { z-index: 2099 !important; }
+.tox-dialog { z-index: 2100 !important; }
+</style>
