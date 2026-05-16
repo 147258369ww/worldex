@@ -31,4 +31,7 @@ uploads
 *.njsproj
 *.sln
 *.sw?
-.playwright-cli/*
+**/.playwright-cli/
+.superpowers/
+screenshots/
+docs/
