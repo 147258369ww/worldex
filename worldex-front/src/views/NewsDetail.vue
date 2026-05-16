@@ -61,7 +61,7 @@ function formatDate(d) { return d ? new Date(d).toLocaleDateString(langStore.cur
 .back-link { display: inline-block; margin-bottom: 24px; color: var(--color-accent); font-weight: 600; }
 .article-date { color: var(--color-text-light); margin-bottom: 20px; }
 .article-cover { width: 100%; max-height: 450px; object-fit: cover; border-radius: var(--radius); margin-bottom: 24px; }
-.article-body { line-height: 1.8; margin-bottom: 30px; }
+.article-body { line-height: 1.8; margin-bottom: 30px; white-space: break-spaces; }
 .article-gallery { margin-top: 30px; }
 .article-gallery h4 { margin-bottom: 12px; color: var(--color-primary); }
 .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; }
