@@ -45,7 +45,6 @@ import 'tinymce/themes/silver'
 import 'tinymce/icons/default'
 import 'tinymce/plugins/autolink'
 import 'tinymce/plugins/link'
-import 'tinymce/plugins/image'
 import Editor from '@tinymce/tinymce-vue'
 
 const langStore = useLangStore()
@@ -57,20 +56,31 @@ const editorConfig = {
   height: 500,
   skin_url: '/tinymce/skins/ui/oxide',
   content_css: '/tinymce/skins/content/default/content.css',
-  plugins: 'autolink link image',
-  toolbar: 'undo redo | bold italic underline strikethrough | alignleft aligncenter alignright | link image',
-  images_upload_handler: async (blobInfo) => {
-    try {
-      const file = new File([blobInfo.blob()], blobInfo.filename(), { type: blobInfo.blob().type })
-      const res = await uploadFile(file)
-      if (res.code === 0) return res.data.url
-      throw new Error(res.message || 'Upload failed')
-    } catch (e) {
-      throw new Error(e.message || 'Upload failed')
-    }
+  plugins: 'autolink link',
+  toolbar: 'undo redo | bold italic underline strikethrough | alignleft aligncenter alignright | link uploadimage',
+  setup: (editor) => {
+    editor.ui.registry.addButton('uploadimage', {
+      icon: 'image',
+      tooltip: '插入图片',
+      onAction: () => {
+        const input = document.createElement('input')
+        input.type = 'file'
+        input.accept = 'image/*'
+        input.onchange = async () => {
+          const file = input.files[0]
+          if (!file) return
+          try {
+            const res = await uploadFile(file)
+            if (res.code === 0) {
+              editor.insertContent(`<img src="${res.data.url}" alt="" />`)
+            }
+          } catch { /* upload failed, ignore */ }
+        }
+        input.click()
+      }
+    })
   },
   menubar: false,
-  block_formats: '正文=p; 标题1=h2; 标题2=h3; 标题3=h4',
 }
 
 async function fetch() { try { const r = await getAdminNews({ limit: 100 }); if (r.code === 0) list.value = r.data.list } catch {} }
@@ -89,14 +99,9 @@ async function handleDelete(id) { if (!confirm(langStore.t('admin.common.deleteC
 .admin-table th,.admin-table td { padding: 12px 16px; text-align: left; border-bottom: 1px solid #e2e8f0; font-size:0.9rem; }
 .btn-sm { padding: 4px 12px; border: 1px solid #e2e8f0; border-radius: 4px; cursor: pointer; margin-right: 4px; background: var(--color-white); }
 .btn-danger { color: #ef4444; border-color: #ef4444; }
-.modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; z-index: 2000; }
+.modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; z-index: 1000; }
 .modal { background: var(--color-white); padding: 30px; border-radius: var(--radius); width: 90%; max-width: 900px; max-height: 80vh; overflow-y: auto; }
 .modal input, .modal textarea { width: 100%; padding: 10px; margin-bottom: 12px; border: 1px solid #e2e8f0; border-radius: var(--radius); font-family: var(--font-body); }
 .modal-actions { display: flex; gap: 12px; margin-top: 16px; }
 .field-label { display: block; font-size: 0.9rem; font-weight: 500; margin-bottom: 6px; color: var(--color-text); }
-</style>
-
-<style>
-.tox-dialog__backdrop { z-index: 2099 !important; }
-.tox-dialog { z-index: 2100 !important; }
 </style>
