@@ -69,7 +69,6 @@ const form = reactive({ title_zh: '', title_en: '', summary_zh: '', summary_en: 
 
 const editorConfig = {
   height: 500,
-  license_key: 'gpl',
   skin_url: '/tinymce/skins/ui/oxide',
   content_css: '/tinymce/skins/content/default/content.css',
   plugins: 'advlist autolink lists link image charmap preview anchor searchreplace visualblocks code fullscreen insertdatetime media table help wordcount',
