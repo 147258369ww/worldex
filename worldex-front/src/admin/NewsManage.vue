@@ -19,9 +19,9 @@
           <input v-model="form.summary_zh" :placeholder="langStore.t('admin.news.summaryZh')" />
           <input v-model="form.summary_en" :placeholder="langStore.t('admin.news.summaryEn')" />
           <label class="field-label">{{ langStore.t('admin.news.contentZh') }}</label>
-          <Editor v-model="form.content_zh" :init="editorConfig" />
+          <Editor v-model="form.content_zh" :init="editorConfig" license-key="gpl" />
           <label class="field-label" style="margin-top:12px">{{ langStore.t('admin.news.contentEn') }}</label>
-          <Editor v-model="form.content_en" :init="editorConfig" />
+          <Editor v-model="form.content_en" :init="editorConfig" license-key="gpl" />
           <input v-model="form.published_at" type="date" />
           <label style="display:flex;align-items:center;gap:8px;margin-bottom:12px"><input type="checkbox" v-model="form.is_active" /> {{ langStore.t('admin.common.active') }}</label>
           <input type="file" @change="handleUpload" />
