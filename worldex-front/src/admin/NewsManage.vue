@@ -73,6 +73,7 @@ const editorConfig = {
             const res = await uploadFile(file)
             if (res.code === 0) {
               editor.insertContent(`<img src="${res.data.url}" alt="" style="max-width:100%; height:auto;" />`)
+              editor.fire('input')
             }
           } catch { /* upload failed, ignore */ }
         }
