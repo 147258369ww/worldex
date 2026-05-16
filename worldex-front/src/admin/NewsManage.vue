@@ -53,11 +53,15 @@ const editorConfig = {
   content_css: '/tinymce/skins/content/default/content.css',
   plugins: 'advlist autolink lists link image charmap preview anchor searchreplace visualblocks code fullscreen insertdatetime media table help wordcount',
   toolbar: 'undo redo | blocks | bold italic underline strikethrough | forecolor backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image table | code fullscreen | help',
-  images_upload_handler: async (blobInfo, progress) => {
-    const file = new File([blobInfo.blob()], blobInfo.filename(), { type: blobInfo.blob().type })
-    const res = await uploadFile(file)
-    if (res.code === 0) return res.data.url
-    throw new Error('Upload failed')
+  images_upload_handler: async (blobInfo) => {
+    try {
+      const file = new File([blobInfo.blob()], blobInfo.filename(), { type: blobInfo.blob().type })
+      const res = await uploadFile(file)
+      if (res.code === 0) return res.data.url
+      throw new Error(res.message || 'Upload failed')
+    } catch (e) {
+      throw new Error(e.message || 'Upload failed')
+    }
   },
   branding: false,
   promotion: false,
