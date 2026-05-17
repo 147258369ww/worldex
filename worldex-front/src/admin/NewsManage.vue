@@ -45,6 +45,7 @@ import 'tinymce/themes/silver'
 import 'tinymce/icons/default'
 import 'tinymce/plugins/autolink'
 import 'tinymce/plugins/link'
+import 'tinymce/plugins/image'
 import Editor from '@tinymce/tinymce-vue'
 
 const langStore = useLangStore()
@@ -56,34 +57,21 @@ const editorConfig = {
   height: 500,
   skin_url: '/tinymce/skins/ui/oxide',
   content_css: '/tinymce/skins/content/default/content.css',
-  plugins: 'autolink link',
-  toolbar: 'undo redo | bold italic underline strikethrough | alignleft aligncenter alignright | link uploadimage',
-  setup: (editor) => {
-    editor.ui.registry.addButton('uploadimage', {
-      icon: 'image',
-      tooltip: '插入图片',
-      onAction: () => {
-        const input = document.createElement('input')
-        input.type = 'file'
-        input.accept = 'image/*'
-        input.onchange = async () => {
-          const file = input.files[0]
-          if (!file) return
-          editor.setProgressState(true)
-          try {
-            const res = await uploadFile(file)
-            if (res.code === 0) {
-              editor.insertContent(`<img src="${res.data.url}" alt="" style="max-width:100%;" />`)
-              editor.fire('change')
-              editor.fire('input')
-            }
-          } catch { /* upload failed, ignore */ }
-          editor.setProgressState(false)
-        }
-        input.click()
+  plugins: 'autolink link image',
+  toolbar: 'undo redo | bold italic underline strikethrough | alignleft aligncenter alignright | link image',
+  images_upload_handler: (blobInfo, progress) => new Promise((resolve, reject) => {
+    const blob = blobInfo.blob()
+    const file = new File([blob], blobInfo.filename(), { type: blob.type || 'image/png' })
+    uploadFile(file).then(res => {
+      if (res.code === 0) {
+        resolve(res.data.url)
+      } else {
+        reject(res.message || 'Upload failed')
       }
+    }).catch(err => {
+      reject(err?.response?.data?.message || err.message || 'Upload failed')
     })
-  },
+  }),
   menubar: false,
 }
 
