@@ -18,12 +18,12 @@
         <h2 class="section-title">{{ langStore.t('home.news_title') }}</h2>
         <div class="news-hlist">
           <div v-if="newsList.length === 0" style="text-align:center;color:var(--color-text-light)">{{ langStore.t('news.no_data') }}</div>
-          <div v-for="item in newsList" :key="item.id" class="news-hitem" @click="$router.push(`/news/${item.id}`)">
+          <router-link v-for="item in newsList" :key="item.id" class="news-hitem" :to="`/news/${item.id}`">
             <span class="news-hdate">{{ formatDate(item.published_at) }}</span>
             <span class="news-htitle">{{ langStore.currentLocale === 'zh' ? item.title_zh : item.title_en }}</span>
             <span class="news-hsummary">{{ langStore.currentLocale === 'zh' ? item.summary_zh : item.summary_en }}</span>
             <span class="news-harrow">→</span>
-          </div>
+          </router-link>
         </div>
         <div style="text-align:center;margin-top:24px">
           <router-link to="/news" class="btn btn-outline">{{ langStore.t('news.read_more') }}</router-link>
@@ -79,7 +79,7 @@ function formatDate(d) { return d ? new Date(d).toLocaleDateString(langStore.cur
 }
 
 .news-hlist { display: flex; flex-direction: column; gap: 0; border-top: 1px solid #e2e8f0; }
-.news-hitem { display: flex; align-items: center; gap: 20px; padding: 16px 0; border-bottom: 1px solid #e2e8f0; cursor: pointer; transition: background 0.2s; }
+.news-hitem { display: flex; align-items: center; gap: 20px; padding: 16px 0; border-bottom: 1px solid #e2e8f0; color: inherit; cursor: pointer; text-decoration: none; transition: background 0.2s; }
 .news-hitem:hover { background: rgba(201,168,76,0.05); }
 .news-hdate { min-width: 100px; font-size: 0.85rem; color: var(--color-text-light); }
 .news-htitle { flex: 1; font-weight: 600; color: var(--color-primary); }

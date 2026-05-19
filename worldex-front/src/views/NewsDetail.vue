@@ -27,7 +27,7 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { useLangStore } from '@/stores/lang'
 import { getNewsDetail } from '@/api/news'
@@ -47,12 +47,14 @@ const gallery = computed(() => {
   } catch { return [] }
 })
 
-onMounted(async () => {
+watch(() => route.params.id, async (id) => {
+  article.value = null
+  lightbox.value = null
   try {
-    const res = await getNewsDetail(route.params.id)
+    const res = await getNewsDetail(id)
     if (res.code === 0) article.value = res.data
   } catch (e) {}
-})
+}, { immediate: true })
 
 function formatDate(d) { return d ? new Date(d).toLocaleDateString(langStore.currentLocale === 'zh' ? 'zh-CN' : 'en-US') : '' }
 </script>

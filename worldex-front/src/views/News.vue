@@ -16,12 +16,12 @@
       <div class="container">
         <div v-if="newsList.length === 0" class="no-data">{{ langStore.t('news.no_data') }}</div>
         <div class="news-hlist">
-          <div v-for="item in newsList" :key="item.id" class="news-hitem" @click="$router.push(`/news/${item.id}`)">
+          <router-link v-for="item in newsList" :key="item.id" class="news-hitem" :to="`/news/${item.id}`">
             <span class="news-hdate">{{ formatDate(item.published_at) }}</span>
             <span class="news-htitle">{{ langStore.currentLocale === 'zh' ? item.title_zh : item.title_en }}</span>
             <span class="news-hsummary">{{ langStore.currentLocale === 'zh' ? item.summary_zh : item.summary_en }}</span>
             <span class="news-harrow">→</span>
-          </div>
+          </router-link>
         </div>
         <div class="pagination" v-if="total > limit">
           <button :disabled="page <= 1" @click="page--">←</button>
@@ -76,7 +76,9 @@ function formatDate(d) { return d ? new Date(d).toLocaleDateString(langStore.cur
   gap: 20px;
   padding: 16px 0;
   border-bottom: 1px solid var(--color-border);
+  color: inherit;
   cursor: pointer;
+  text-decoration: none;
   transition: background 0.2s;
 }
 

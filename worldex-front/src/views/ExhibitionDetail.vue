@@ -39,7 +39,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { useLangStore } from '@/stores/lang'
 import { getExhibition } from '@/api/exhibitions'
@@ -70,12 +70,13 @@ const formatDateRange = (from, to) => {
   return `${formatDate(from)}-${formatDate(to)}`
 }
 
-onMounted(async () => {
+watch(() => route.params.id, async (id) => {
+  exhibition.value = null
   try {
-    const res = await getExhibition(route.params.id)
+    const res = await getExhibition(id)
     if (res.code === 0) exhibition.value = res.data
   } catch (e) {}
-})
+}, { immediate: true })
 </script>
 
 <style scoped>
