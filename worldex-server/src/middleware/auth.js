@@ -16,4 +16,12 @@ function auth(req, res, next) {
   }
 }
 
+function adminAuth(req, res, next) {
+  if (req.user?.role !== 'admin') {
+    return res.status(403).json({ code: 403, message: 'Admin access required' });
+  }
+  next();
+}
+
 module.exports = auth;
+module.exports.adminAuth = adminAuth;

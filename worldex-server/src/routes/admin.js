@@ -41,10 +41,10 @@ router.get('/company-info', auth, companyController.getAdmin);
 router.put('/company-info', auth, companyController.update);
 
 // Users
-router.get('/users', auth, usersController.getAll);
-router.post('/users', auth, usersController.create);
-router.put('/users/:id', auth, usersController.update);
-router.delete('/users/:id', auth, usersController.remove);
+router.get('/users', auth, auth.adminAuth, usersController.getAll);
+router.post('/users', auth, auth.adminAuth, usersController.create);
+router.put('/users/:id', auth, auth.adminAuth, usersController.update);
+router.delete('/users/:id', auth, auth.adminAuth, usersController.remove);
 
 // Upload
 router.post('/upload', auth, (req, res, next) => {

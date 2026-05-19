@@ -26,9 +26,19 @@ async function create(req, res) {
 
 async function update(req, res) {
   const { username, password, role } = req.body;
-  const data = { role };
+  const data = {};
+  const user = await db('users').where({ id: req.params.id }).first();
+  if (!user) return fail(res, 'User not found');
+  if (role) {
+    if (user.role === 'admin' && role !== 'admin') {
+      const adminCount = await db('users').where({ role: 'admin' }).count('id as count').first();
+      if (adminCount.count <= 1) return fail(res, 'Cannot demote the last admin');
+    }
+    data.role = role;
+  }
   if (username) data.username = username;
   if (password) data.password_hash = await bcrypt.hash(password, 10);
+  if (Object.keys(data).length === 0) return fail(res, 'No changes provided');
   await db('users').where({ id: req.params.id }).update(data);
   return success(res);
 }
