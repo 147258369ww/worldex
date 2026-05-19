@@ -52,15 +52,22 @@ const langStore = useLangStore()
 
 const list = ref([]); const showForm = ref(false); const editing = ref(null); const saveError = ref('')
 const form = reactive({ title_zh: '', title_en: '', summary_zh: '', summary_en: '', content_zh: '', content_en: '', published_at: '', is_active: true, cover_image: '' })
+const maxImageSize = 20 * 1024 * 1024
 
 const editorConfig = {
   height: 500,
   skin_url: '/tinymce/skins/ui/oxide',
   content_css: '/tinymce/skins/content/default/content.css',
+  language: 'zh_CN',
+  language_url: '/tinymce/langs/zh_CN.js',
   plugins: 'autolink link image',
   toolbar: 'undo redo | bold italic underline strikethrough | alignleft aligncenter alignright | link image',
   images_upload_handler: (blobInfo, progress) => new Promise((resolve, reject) => {
     const blob = blobInfo.blob()
+    if (blob.size > maxImageSize) {
+      reject('图片不能超过 20MB')
+      return
+    }
     const file = new File([blob], blobInfo.filename(), { type: blob.type || 'image/png' })
     uploadFile(file).then(res => {
       if (res.code === 0) {

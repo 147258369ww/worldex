@@ -47,6 +47,14 @@ router.put('/users/:id', auth, usersController.update);
 router.delete('/users/:id', auth, usersController.remove);
 
 // Upload
-router.post('/upload', auth, upload.single('file'), uploadController.uploadFile);
+router.post('/upload', auth, (req, res, next) => {
+  upload.single('file')(req, res, (err) => {
+    if (!err) return next();
+    if (err.code === 'LIMIT_FILE_SIZE') {
+      return res.status(413).json({ code: 1, message: '图片不能超过 20MB' });
+    }
+    return res.status(400).json({ code: 1, message: err.message || '图片上传失败' });
+  });
+}, uploadController.uploadFile);
 
 module.exports = router;
