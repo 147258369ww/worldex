@@ -52,7 +52,8 @@ import Editor from '@tinymce/tinymce-vue'
 const langStore = useLangStore()
 
 const list = ref([]); const showForm = ref(false); const editing = ref(null); const saveError = ref(''); const fetchError = ref('')
-const form = reactive({ title_zh: '', title_en: '', summary_zh: '', summary_en: '', content_zh: '', content_en: '', published_at: '', is_active: true, cover_image: '' })
+const defaultForm = () => ({ title_zh: '', title_en: '', summary_zh: '', summary_en: '', content_zh: '', content_en: '', published_at: '', is_active: true, cover_image: '' })
+const form = reactive(defaultForm())
 const maxImageSize = 20 * 1024 * 1024
 
 const editorConfig = {
@@ -94,8 +95,54 @@ async function fetch() {
   }
 }
 onMounted(fetch)
-function openForm(item) { editing.value = item || null; if (item) { const copy = { ...item }; if (copy.published_at) copy.published_at = copy.published_at.split('T')[0]; Object.assign(form, copy); } else Object.assign(form, { title_zh: '', title_en: '', summary_zh: '', summary_en: '', content_zh: '', content_en: '', published_at: '', is_active: true, cover_image: '' }); showForm.value = true }
-async function handleSave() { saveError.value = ''; const payload = { ...form }; if (payload.published_at) { const d = new Date(payload.published_at); payload.published_at = d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0'); } try { if (editing.value?.id) await updateNews(editing.value.id, payload); else await createNews(payload); showForm.value = false; fetch() } catch (e) { saveError.value = e?.response?.data?.message || e.message || '保存失败' } }
+function resetForm(data = defaultForm()) {
+  Object.keys(form).forEach(key => delete form[key])
+  Object.assign(form, data)
+}
+function openForm(item) {
+  editing.value = item || null
+  saveError.value = ''
+  if (item) {
+    const copy = { ...item }
+    if (copy.published_at) copy.published_at = copy.published_at.split('T')[0]
+    resetForm(copy)
+  } else {
+    resetForm()
+  }
+  showForm.value = true
+}
+function buildNewsPayload() {
+  const payload = {
+    title_zh: form.title_zh,
+    title_en: form.title_en,
+    summary_zh: form.summary_zh,
+    summary_en: form.summary_en,
+    content_zh: form.content_zh,
+    content_en: form.content_en,
+    published_at: form.published_at,
+    is_active: form.is_active,
+    cover_image: form.cover_image,
+    images: form.images
+  }
+  if (payload.published_at) {
+    const d = new Date(payload.published_at)
+    payload.published_at = d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0')
+  }
+  if (!payload.images) delete payload.images
+  return payload
+}
+async function handleSave() {
+  saveError.value = ''
+  const payload = buildNewsPayload()
+  try {
+    if (editing.value?.id) await updateNews(editing.value.id, payload)
+    else await createNews(payload)
+    showForm.value = false
+    fetch()
+  } catch (e) {
+    saveError.value = e?.response?.data?.message || e.message || '保存失败'
+  }
+}
 async function handleDelete(id) { if (!confirm(langStore.t('admin.common.deleteConfirm'))) return; try { await deleteNews(id); fetch() } catch {} }
 </script>
 

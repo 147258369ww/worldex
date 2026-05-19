@@ -50,6 +50,7 @@ async function getAll(req, res) {
 
 async function create(req, res) {
   const data = { ...req.body };
+  delete data.id;
   delete data.created_at;
   delete data.updated_at;
   if (data.images && typeof data.images === 'string') {
