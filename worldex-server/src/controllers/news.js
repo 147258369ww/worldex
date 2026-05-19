@@ -26,19 +26,26 @@ async function getOne(req, res) {
 }
 
 async function getAll(req, res) {
-  const { page = 1, limit = 20 } = req.query;
-  const query = db('news');
-  const total = await query.clone().count('id as count').first();
-  const rows = await query
-    .orderBy('created_at', 'desc')
-    .limit(parseInt(limit))
-    .offset((parseInt(page) - 1) * parseInt(limit));
-  return success(res, {
-    list: rows,
-    total: total.count,
-    page: parseInt(page),
-    limit: parseInt(limit)
-  });
+  try {
+    const { page = 1, limit = 20 } = req.query;
+    const pageNum = Math.max(parseInt(page, 10) || 1, 1);
+    const limitNum = Math.min(Math.max(parseInt(limit, 10) || 20, 1), 100);
+    const query = db('news');
+    const total = await query.clone().count('id as count').first();
+    const rows = await query
+      .orderBy('created_at', 'desc')
+      .limit(limitNum)
+      .offset((pageNum - 1) * limitNum);
+    return success(res, {
+      list: rows,
+      total: total.count,
+      page: pageNum,
+      limit: limitNum
+    });
+  } catch (e) {
+    console.error('Failed to load admin news:', e);
+    return fail(res, '新闻列表加载失败，请检查服务器日志');
+  }
 }
 
 async function create(req, res) {
